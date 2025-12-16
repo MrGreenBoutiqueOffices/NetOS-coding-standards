@@ -1,6 +1,6 @@
 <?php
 
-namespace ProgramicLint\Configs;
+namespace NetOSLint\Configs;
 
 use Tighten\TLint\Presets\PresetInterface;
 

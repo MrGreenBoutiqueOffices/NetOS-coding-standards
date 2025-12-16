@@ -18,7 +18,7 @@ done
 
 echo "🔍  Setting up PHP linting environment..."
 
-STUBS_DIR="vendor/programic/php-linting-rules/stubs"
+STUBS_DIR="vendor/net-os/php-linting-rules/stubs"
 
 publish_config_if_missing() {
   local filename=$1

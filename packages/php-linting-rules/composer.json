@@ -1,16 +1,16 @@
 {
-  "name": "programic/php-linting-rules",
+  "name": "net-os/php-linting-rules",
   "description": "Shared linting rules for PHP projects",
   "type": "library",
   "license": "MIT",
   "authors": [
     {
       "name": "Mike Meijer",
-      "email": "m.meijer@programic.com"
+      "email": "mike.meijer@net-os.com"
     },
     {
       "name": "Thimon Wentink",
-      "email": "t.wentink@programic.com"
+      "email": "thimon.wentink@net-os.com"
     }
   ],
   "require": {
@@ -26,11 +26,11 @@
   },
   "autoload": {
     "psr-4": {
-      "ProgramicLint\\Configs\\": "configs/"
+      "NetOSLint\\Configs\\": "configs/"
     }
   },
   "bin": [
-    "bin/programic-lint-setup"
+    "bin/net-os-lint-setup"
   ],
   "config": {
     "allow-plugins": {

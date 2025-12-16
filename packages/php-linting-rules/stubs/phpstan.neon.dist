@@ -1,2 +1,2 @@
 includes:
-  - vendor/programic/php-linting-rules/configs/phpstan.neon
+  - vendor/net-os/php-linting-rules/configs/phpstan.neon

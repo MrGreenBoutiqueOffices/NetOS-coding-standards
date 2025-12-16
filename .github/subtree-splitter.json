@@ -3,7 +3,7 @@
     {
       "name": "php-linting-rules",
       "directory": "packages/php-linting-rules",
-      "target": "git@github.com:programic/php-linting-rules.git"
+      "target": "git@github.com:net-os/php-linting-rules.git"
     }
   ]
 }

@@ -11,5 +11,5 @@ return ECSConfig::configure()
         __DIR__ . '/config',
     ])
     ->withSets([
-        __DIR__ . '/vendor/programic/php-linting-rules/configs/ecs.php',
+        __DIR__ . '/vendor/net-os/php-linting-rules/configs/ecs.php',
     ]);

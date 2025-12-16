@@ -1,5 +1,5 @@
 # 🚀 About
-This package is meant to store all the linting rules for PHP projects at Programic.
+This package is meant to store all the linting rules for PHP projects at NetOS.
 It contains the following linting tools at the moment:
 - [Larastan](https://github.com/larastan/larastan)
 - [TLint](https://github.com/tighten/tlint)
@@ -20,12 +20,12 @@ It contains the following linting tools at the moment:
 
 ## 1. Require the composer package
 ```bash
-composer require --dev programic/php-linting-rules
+composer require --dev net-os/php-linting-rules
 ```
 
 ## 2. Run the setup command
 ```bash
-vendor/bin/programic-lint-setup
+vendor/bin/net-os-lint-setup
 ```
 
 This command will:
