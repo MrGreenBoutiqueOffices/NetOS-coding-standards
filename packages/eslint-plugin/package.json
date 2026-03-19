@@ -1,0 +1,182 @@
+{
+  "name": "@net-os/eslint-plugin",
+  "version": "0.0.1",
+  "description": "Official ESLint plugin for NetOS, enforcing consistent coding standards across frontend projects.",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "lint",
+    "linter"
+  ],
+  "homepage": "https://github.com/MrGreenBoutiqueOffices/NetOS-coding-standards#readme",
+  "bugs": {
+    "url": "https://github.com/MrGreenBoutiqueOffices/NetOS-coding-standards/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrGreenBoutiqueOffices/NetOS-coding-standards.git",
+    "directory": "packages/eslint-plugin"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Thimon Wentink",
+    "email": "thimon.wentink@net-os.com",
+    "url": "https://github.com/thimonwentink"
+  },
+  "type": "module",
+  "types": "dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "lint": "eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "watch": "tsdown --watch",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test:run && npm run build",
+    "preversion": "npm run lint && npm run typecheck",
+    "postversion": "git push && git push --tags",
+    "version": "git add -A"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "globals": "^17.4.0"
+  },
+  "peerDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@tanstack/eslint-plugin-query": "^5.95.2",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
+    "@typescript-eslint/parser": "^8.57.2",
+    "@vitest/eslint-plugin": "^1.6.13",
+    "eslint": "^9.39.4",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-better-tailwindcss": "^4.3.2",
+    "eslint-plugin-expo": "^1.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-dom": "^2.13.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-naming-convention": "^2.13.0",
+    "eslint-plugin-react-web-api": "^2.13.0",
+    "eslint-plugin-react-x": "^2.13.0",
+    "eslint-plugin-testing-library": "^7.16.2",
+    "eslint-plugin-unicorn": "^63.0.0",
+    "eslint-plugin-vue": "~10.8.0",
+    "typescript": "^5.9.3"
+  },
+  "peerDependenciesMeta": {
+    "@stylistic/eslint-plugin": {
+      "optional": true
+    },
+    "@tanstack/eslint-plugin-query": {
+      "optional": true
+    },
+    "@typescript-eslint/eslint-plugin": {
+      "optional": true
+    },
+    "@typescript-eslint/parser": {
+      "optional": true
+    },
+    "@vitest/eslint-plugin": {
+      "optional": true
+    },
+    "eslint-import-resolver-typescript": {
+      "optional": true
+    },
+    "eslint-plugin-better-tailwindcss": {
+      "optional": true
+    },
+    "eslint-plugin-expo": {
+      "optional": true
+    },
+    "eslint-plugin-import": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-dom": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-react-naming-convention": {
+      "optional": true
+    },
+    "eslint-plugin-react-web-api": {
+      "optional": true
+    },
+    "eslint-plugin-react-x": {
+      "optional": true
+    },
+    "eslint-plugin-testing-library": {
+      "optional": true
+    },
+    "eslint-plugin-unicorn": {
+      "optional": true
+    },
+    "eslint-plugin-vue": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@tanstack/eslint-plugin-query": "^5.95.2",
+    "@types/eslint": "^9.6.1",
+    "@types/eslint-plugin-jsx-a11y": "^6.10.1",
+    "@types/node": "^25.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.1",
+    "@typescript-eslint/parser": "^8.57.2",
+    "@typescript-eslint/utils": "^8.57.2",
+    "@vitest/eslint-plugin": "^1.6.13",
+    "eslint": "^9.39.4",
+    "eslint-config-expo": "^55.0.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-better-tailwindcss": "^4.3.2",
+    "eslint-plugin-expo": "^1.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-dom": "^2.13.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-naming-convention": "^2.13.0",
+    "eslint-plugin-react-web-api": "^2.13.0",
+    "eslint-plugin-react-x": "^2.13.0",
+    "eslint-plugin-testing-library": "^7.16.2",
+    "eslint-plugin-unicorn": "^63.0.0",
+    "eslint-plugin-vue": "^10.8.0",
+    "globals": "^17.4.0",
+    "tsdown": "^0.21.5",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.1"
+  }
+}
