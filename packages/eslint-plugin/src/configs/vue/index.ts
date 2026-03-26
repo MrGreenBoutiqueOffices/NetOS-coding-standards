@@ -12,15 +12,6 @@ const baseVueConfig = vuePlugin.configs['flat/base'];
 const { parser, ...languageOptions } = typescriptLanguageOptions;
 
 const overrideRules: FlatConfig.Rules = {
-  '@typescript-eslint/no-use-before-define': ['error', {
-    ignoreTypeReferences: true,
-    allowNamedExports: false,
-    functions: false,
-    variables: true,
-    typedefs: true,
-    classes: true,
-    enums: true,
-  }],
   'unicorn/prevent-abbreviations': ['error', {
     checkShorthandProperties: true,
     checkProperties: true,

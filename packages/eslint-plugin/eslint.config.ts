@@ -1,19 +1,7 @@
-import { defineConfig, globalIgnores } from 'eslint/config';
-import pluginNetOS from './src';
+import { globalIgnores } from 'eslint/config';
+import netos from './src';
 
-export default defineConfig([
-  globalIgnores(['dist/']),
-  {
-    plugins: {
-      '@net-os': pluginNetOS,
-    },
-    extends: [
-      '@net-os/typescript',
-    ],
-    settings: {
-      'import/resolver': {
-        typescript: true,
-      },
-    },
-  },
-]);
+export default [
+  globalIgnores(['dist/', '.claude/']),
+  ...await netos({ typescript: true, vitest: true }),
+];

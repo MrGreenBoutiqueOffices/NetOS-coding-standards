@@ -17,73 +17,56 @@ You will also need to install the peer dependencies required by the configs you 
 
 ## Usage
 
-This plugin requires **ESLint v9+** with [flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new) (`eslint.config.js` / `eslint.config.ts`).
+This plugin requires **ESLint v9+** with [flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new) (`eslint.config.ts`).
+
+The default export is an async factory function. Pass an options object to enable the configs you need — only the selected configs (and their peer dependencies) are loaded.
 
 ### Basic TypeScript project
 
-```js
-import { defineConfig } from 'eslint/config';
+```ts
 import netos from '@net-os/eslint-plugin';
 
-export default defineConfig([
-  ...netos.configs.typescript,
-]);
-```
-
-### React + Tailwind CSS project
-
-```js
-import { defineConfig } from 'eslint/config';
-import netos from '@net-os/eslint-plugin';
-
-export default defineConfig([
-  ...netos.configs.typescript,
-  ...netos.configs.react,
-  ...netos.configs.tailwindcss,
-]);
+export default netos({ typescript: true });
 ```
 
 ### Expo (React Native) project
 
-```js
-import { defineConfig } from 'eslint/config';
+```ts
 import netos from '@net-os/eslint-plugin';
 
-export default defineConfig([
-  ...netos.configs.typescript,
-  ...netos.configs.react,
-  ...netos.configs.expo,
-]);
+export default netos({ expo: true });
 ```
 
 ### Vue + Vitest project
 
-```js
-import { defineConfig } from 'eslint/config';
+```ts
+import netos from '@net-os/eslint-plugin';
+
+export default netos({ vue: true, vitest: true });
+```
+
+### Combining with custom config
+
+Since `netos()` returns a promise, use `await` and spread the result into your own config array to add custom entries like global ignores or rule overrides:
+
+```ts
+import { defineConfig, globalIgnores } from 'eslint/config';
 import netos from '@net-os/eslint-plugin';
 
 export default defineConfig([
-  ...netos.configs.typescript,
-  ...netos.configs.vue,
-  ...netos.configs.vitest,
-]);
-```
-
-### Using the named export
-
-```js
-import { defineConfig } from 'eslint/config';
-import { flatConfigs } from '@net-os/eslint-plugin';
-
-export default defineConfig([
-  ...flatConfigs.typescript,
-  ...flatConfigs.react,
+  globalIgnores(['dist/', 'coverage/']),
+  ...await netos({ react: true, vitest: true }),
+  {
+    rules: {
+      'no-console': 'warn',
+    },
+  },
 ]);
 ```
 
 ## Configs
 
-Each config is an array of flat config objects that you spread into your config.
+Enable configs by passing `true` in the options object. Only the selected configs and their plugins are loaded.
 
 | Config        | Files                                                                  | Description                                                                                           |
 |---------------|------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
@@ -96,25 +79,31 @@ Each config is an array of flat config objects that you spread into your config.
 | `tailwindcss` | all files                                                              | Tailwind class ordering, duplicate detection, deprecation checks                                      |
 | `tanstack`    | all files                                                              | TanStack Query exhaustive deps, property order, query function validation                             |
 
-Configs that target all files by default (e.g. `tailwindcss`, `tanstack`) can be narrowed to specific file types by adding a `files` override after spreading:
+Configs that target all files (e.g. `tailwindcss`, `tanstack`) can be narrowed to specific file types by adding a `files` override after spreading:
 
-```js
-import { defineConfig } from 'eslint/config';
+```ts
+import { defineConfig, globalIgnores } from 'eslint/config';
 import netos from '@net-os/eslint-plugin';
 
+const configs = await netos({ react: true, tailwindcss: true });
+
 export default defineConfig([
-  ...netos.configs.tailwindcss.map((config) => ({
-    ...config,
-    files: ['**/*.{ts,tsx}'],
-  })),
+  globalIgnores(['dist/']),
+  ...configs.map((config) => {
+    return config.name?.startsWith('@net-os/tailwindcss')
+      ? { ...config, files: ['**/*.{ts,tsx}'] }
+      : config;
+  }),
 ]);
 ```
 
-### Config hierarchy
+### Config hierarchy and automatic dependency resolution
 
-- **`typescript`** includes all `javascript` rules — you do not need to use both.
-- **`react`** and **`vue`** are additive — use them alongside `typescript`.
-- **`expo`**, **`tailwindcss`**, **`tanstack`**, and **`vitest`** are independent add-ons.
+- **`typescript`** includes all `javascript` rules — you do not need to enable both.
+- **`react`** and **`vue`** automatically include `typescript` (and thus `javascript`).
+- **`expo`** automatically includes `react` and `typescript` (and thus `javascript`).
+- You do not need to specify dependencies like `typescript: true` or `react: true` separately.
+- **`tailwindcss`**, **`tanstack`**, and **`vitest`** are independent add-ons.
 
 ### React sub-configs
 

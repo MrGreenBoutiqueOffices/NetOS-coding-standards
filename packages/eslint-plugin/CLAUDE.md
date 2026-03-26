@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-`@net-os/eslint-plugin` is an ESLint flat config plugin that bundles opinionated rule sets for NetOS frontend projects. It provides eight composable configs: `javascript`, `typescript`, `react`, `expo`, `tailwindcss`, `tanstack`, `vitest`, and `vue`. Consumers spread configs into their own ESLint flat config arrays.
+`@net-os/eslint-plugin` is an ESLint flat config plugin that bundles opinionated rule sets for NetOS frontend projects. It provides eight composable configs: `javascript`, `typescript`, `react`, `expo`, `tailwindcss`, `tanstack`, `vitest`, and `vue`. Consumers call the factory function with the configs they need.
 
 This package lives inside a monorepo at `packages/eslint-plugin/`.
 
@@ -23,7 +23,23 @@ npm run typecheck    # Type-check without emitting
 
 ### Entry point
 
-`src/index.ts` exports a default plugin object with `meta` (name/version from package.json) and `configs` (all eight config arrays). It also exports `flatConfigs` as a named export for direct access.
+`src/index.ts` re-exports the factory function from `src/factory.ts` as the default export, along with the `ConfigName` and `NetosOptions` types.
+
+### Factory function (`src/factory.ts`)
+
+The default export is an async factory function `netos(options)` that:
+- Accepts a `NetosOptions` object (`Partial<Record<ConfigName, boolean>>`) specifying which configs to enable
+- Automatically resolves dependencies (e.g., `react: true` auto-includes `typescript`)
+- Dynamically imports only the requested configs via `import()`, so unused configs and their peer dependencies are never loaded
+- Returns `Promise<FlatConfig.ConfigArray>` with configs ordered correctly (base → framework)
+
+Consumer usage:
+```ts
+import netos from '@net-os/eslint-plugin';
+export default netos({ typescript: true, react: true });
+```
+
+Dependency auto-resolution: `react` and `vue` automatically include `typescript`. `expo` automatically includes `typescript` and `react`.
 
 ### Config module pattern
 
@@ -55,7 +71,7 @@ Rule files are pure data organized by concern (e.g., `react/rules/hooks.ts`, `re
 
 ### Self-linting
 
-The plugin lints itself using its own TypeScript config (`eslint.config.ts` extends `@net-os/typescript`).
+The plugin lints itself using its own TypeScript config (`eslint.config.ts` calls `netos({ typescript: true })`).
 
 ### Build output
 
@@ -74,7 +90,7 @@ tsdown produces dual-format output in `dist/`: ESM (`.mjs`), CJS (`.cjs`), and d
 
 1. Create `src/configs/{name}/index.ts` exporting a `FlatConfig.ConfigArray`
 2. Create rule files in `src/configs/{name}/rules/` exporting `FlatConfig.Rules` objects
-3. Import and register the config in `src/index.ts`
+3. Add a loader entry in `src/factory.ts` (`configLoaders`), add the name to `ConfigName` type and `CONFIG_ORDER`, and optionally add dependency entries to `configDependencies`
 4. Add required plugins to `peerDependencies` in `package.json`
 
 ## Adding rules to an existing config

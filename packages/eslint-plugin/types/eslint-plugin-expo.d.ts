@@ -1,5 +1,5 @@
 declare module 'eslint-plugin-expo' {
-  import { ESLint } from 'eslint';
+  import type { ESLint } from 'eslint';
 
   const plugin: ESLint.Plugin;
   export = plugin;

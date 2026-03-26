@@ -8,7 +8,7 @@ const rules: FlatConfig.Rules = {
     suite: 'each',
   }],
   'vitest/consistent-test-filename': ['error', {
-    pattern: '^[a-z0-9-]+\\.spec\\.tsx?$',
+    pattern: '(?:^|/)[a-z0-9-]+\\.spec\\.tsx?$',
     allTestPattern: '.*\\.(test|spec)\\.[tj]sx?$',
   }],
   'vitest/consistent-test-it': ['error', {
@@ -38,7 +38,7 @@ const rules: FlatConfig.Rules = {
   'vitest/no-hooks': 'off',
   'vitest/no-identical-title': 'error',
   'vitest/no-import-node-test': 'error',
-  'vitest/no-importing-vitest-globals': 'error',
+  'vitest/no-importing-vitest-globals': 'off',
   'vitest/no-interpolation-in-snapshots': 'off',
   'vitest/no-large-snapshots': 'off',
   'vitest/no-mocks-import': 'off',
@@ -70,7 +70,7 @@ const rules: FlatConfig.Rules = {
   'vitest/prefer-hooks-in-order': 'error',
   'vitest/prefer-hooks-on-top': 'error',
   'vitest/prefer-import-in-mock': 'error',
-  'vitest/prefer-importing-vitest-globals': 'off',
+  'vitest/prefer-importing-vitest-globals': 'error',
   'vitest/prefer-lowercase-title': 'error',
   'vitest/prefer-mock-promise-shorthand': 'error',
   'vitest/prefer-mock-return-shorthand': 'error',

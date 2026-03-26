@@ -1,3 +1,4 @@
+// eslint-disable-next-line unicorn/prevent-abbreviations
 import { describe, expect, it } from 'vitest';
 
 import { getNamingConventionRuleOptions } from '../src/utils/rules';
@@ -16,20 +17,21 @@ describe('getNamingConventionRuleOptions', () => {
   it('should return a copy of defaults when called without replacements', () => {
     const result = getNamingConventionRuleOptions();
 
-    expect(result).toEqual(defaultNamingConventionOptions);
+    expect(result).toStrictEqual(defaultNamingConventionOptions);
     expect(result).not.toBe(defaultNamingConventionOptions);
   });
 
   it('should return a copy of defaults when called with undefined', () => {
     const result = getNamingConventionRuleOptions();
-    expect(result).toEqual(defaultNamingConventionOptions);
+
+    expect(result).toStrictEqual(defaultNamingConventionOptions);
   });
 
   it('should replace a matching selector', () => {
     const replacement = { selector: 'variable', format: ['StrictPascalCase', 'UPPER_CASE'] };
     const result = getNamingConventionRuleOptions([replacement]);
 
-    expect(findBySelector(result, 'variable')).toEqual(replacement);
+    expect(findBySelector(result, 'variable')).toStrictEqual(replacement);
   });
 
   it('should keep non-matching selectors unchanged', () => {
@@ -40,7 +42,7 @@ describe('getNamingConventionRuleOptions', () => {
       option => option.selector === 'function',
     );
 
-    expect(findBySelector(result, 'function')).toEqual(originalFunctionOption);
+    expect(findBySelector(result, 'function')).toStrictEqual(originalFunctionOption);
   });
 
   it('should handle multiple replacements', () => {
@@ -50,8 +52,8 @@ describe('getNamingConventionRuleOptions', () => {
     ];
     const result = getNamingConventionRuleOptions(replacements);
 
-    expect(findBySelector(result, 'variable')).toEqual(replacements[0]);
-    expect(findBySelector(result, 'function')).toEqual(replacements[1]);
+    expect(findBySelector(result, 'variable')).toStrictEqual(replacements[0]);
+    expect(findBySelector(result, 'function')).toStrictEqual(replacements[1]);
   });
 
   it('should preserve the same number of options', () => {
@@ -65,6 +67,6 @@ describe('getNamingConventionRuleOptions', () => {
     const replacement = { selector: 'nonExistentSelector', format: ['StrictPascalCase'] };
     const result = getNamingConventionRuleOptions([replacement]);
 
-    expect(result).toEqual(defaultNamingConventionOptions);
+    expect(result).toStrictEqual(defaultNamingConventionOptions);
   });
 });

@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import plugin, { flatConfigs } from '../src';
 import javascript from '../src/configs/javascript';
 import typescript from '../src/configs/typescript';
 import react from '../src/configs/react';
@@ -68,7 +67,8 @@ describe.each(configs)('config smoke tests - $name', ({ config, expectedEntries 
 
   it('should have named config entries', () => {
     const names = config.map(entry => entry.name);
-    expect(names).toEqual(expectedEntries);
+
+    expect(names).toStrictEqual(expectedEntries);
   });
 
   it.each(
@@ -79,25 +79,7 @@ describe.each(configs)('config smoke tests - $name', ({ config, expectedEntries 
 
   it.each(
     config.filter(entry => entry.plugins),
-  )('should have plugins registered in entry "$name"', (entry) => {
+  )('should have plugins registered in entry "$name"', entry => {
     expect(Object.keys(entry.plugins ?? {}).length).toBeGreaterThan(0);
-  });
-});
-
-describe('plugin export', () => {
-  it('should export a valid plugin object with meta', () => {
-    expect(plugin.meta).toBeDefined();
-    expect(plugin.meta?.name).toBe('@net-os/eslint-plugin');
-    expect(plugin.meta?.version).toBe('0.0.1');
-  });
-
-  it('should export all eight configs', () => {
-    expect(Object.keys(plugin.configs ?? {})).toStrictEqual(
-      ['javascript', 'typescript', 'tailwindcss', 'tanstack', 'vitest', 'react', 'expo', 'vue'],
-    );
-  });
-
-  it('should export flatConfigs matching plugin.configs', () => {
-    expect(flatConfigs).toStrictEqual(plugin.configs);
   });
 });
