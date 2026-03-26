@@ -4,16 +4,18 @@ export type ConfigName = 'javascript' | 'typescript' | 'react' | 'expo' | 'tailw
 
 export type NetosOptions = Partial<Record<ConfigName, boolean>>;
 
+/* eslint-disable unicorn/no-await-expression-member -- direct import() is required so the bundler can rewrite chunk paths */
 const configLoaders: Record<ConfigName, () => Promise<FlatConfig.ConfigArray>> = {
-  javascript: async () => loadModule('./configs/javascript'),
-  typescript: async () => loadModule('./configs/typescript'),
-  react: async () => loadModule('./configs/react'),
-  expo: async () => loadModule('./configs/expo'),
-  tailwindcss: async () => loadModule('./configs/tailwindcss'),
-  tanstack: async () => loadModule('./configs/tanstack'),
-  vitest: async () => loadModule('./configs/vitest'),
-  vue: async () => loadModule('./configs/vue'),
+  javascript: async () => (await import('./configs/javascript')).default,
+  typescript: async () => (await import('./configs/typescript')).default,
+  react: async () => (await import('./configs/react')).default,
+  expo: async () => (await import('./configs/expo')).default,
+  tailwindcss: async () => (await import('./configs/tailwindcss')).default,
+  tanstack: async () => (await import('./configs/tanstack')).default,
+  vitest: async () => (await import('./configs/vitest')).default,
+  vue: async () => (await import('./configs/vue')).default,
 };
+/* eslint-enable unicorn/no-await-expression-member */
 
 const configDependencies: Partial<Record<ConfigName, ConfigName[]>> = {
   react: ['typescript'],
@@ -31,12 +33,6 @@ const CONFIG_ORDER: ConfigName[] = [
   'expo',
   'vue',
 ];
-
-async function loadModule(path: string): Promise<FlatConfig.ConfigArray> {
-  const module: { default: FlatConfig.ConfigArray } = await import(path);
-
-  return module.default;
-}
 
 function isConfigName(name: string): name is ConfigName {
   return name in configLoaders;
