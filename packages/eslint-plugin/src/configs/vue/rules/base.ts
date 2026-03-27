@@ -222,7 +222,6 @@ const rules: FlatConfig.Rules = {
   'vue/no-unused-properties': ['error', {
     deepData: true,
     groups: [
-      'inject',
       'props',
       'data',
       'computed',
@@ -271,7 +270,6 @@ const rules: FlatConfig.Rules = {
   'vue/prefer-define-options': 'error',
   'vue/prefer-prop-type-boolean-first': 'off',
   'vue/prefer-separate-static-class': 'error',
-  'vue/prefer-single-event-payload': 'error',
   'vue/prefer-true-attribute-shorthand': 'off',
   'vue/prefer-use-template-ref': 'error',
   'vue/require-default-export': 'error',
