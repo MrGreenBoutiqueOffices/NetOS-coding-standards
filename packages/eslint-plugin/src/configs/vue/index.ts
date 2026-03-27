@@ -22,9 +22,22 @@ import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 
 const baseVueConfig = vuePlugin.configs['flat/base'];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { parser, ...languageOptions } = typescriptLanguageOptions;
+const { parser, ...baseLanguageOptions } = typescriptLanguageOptions;
+const languageOptions: FlatConfig.LanguageOptions = {
+  ...baseLanguageOptions,
+  parserOptions: {
+    ...baseLanguageOptions.parserOptions ?? {},
+    parser: typescriptLanguageOptions.parser,
+    extraFileExtensions: ['.vue'],
+  },
+};
 
 const overrideRules: FlatConfig.Rules = {
+  'id-length': ['error', {
+    min: 2,
+    properties: 'always',
+    exceptions: ['t', 'rt', 'd', 'n', 'te', 'tm'],
+  }],
   'unicorn/prevent-abbreviations': ['error', {
     checkShorthandProperties: true,
     checkProperties: true,
@@ -48,6 +61,7 @@ const config: FlatConfig.ConfigArray = [
       '@stylistic': stylisticPlugin,
       '@typescript-eslint': typescriptPlugin,
     },
+    languageOptions,
     rules: {
       ...jsBaseRules,
       ...jsImportRules,
@@ -65,13 +79,7 @@ const config: FlatConfig.ConfigArray = [
     plugins: {
       vue: vuePlugin,
     },
-    languageOptions: {
-      ...languageOptions,
-      parserOptions: {
-        ...languageOptions.parserOptions ?? {},
-        parser: typescriptLanguageOptions.parser,
-      },
-    },
+    languageOptions,
     settings: typescriptSettings,
     rules: {
       ...vueBaseRules,
