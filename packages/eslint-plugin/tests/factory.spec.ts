@@ -39,6 +39,7 @@ describe('netos factory', { timeout: 30_000 }, () => {
 
     expect(names).toContain('@net-os/typescript');
     expect(names).toContain('@net-os/vue');
+    expect(names).toContain('@net-os/vue/typescript');
   });
 
   it('should auto-include typescript when expo is enabled', async () => {

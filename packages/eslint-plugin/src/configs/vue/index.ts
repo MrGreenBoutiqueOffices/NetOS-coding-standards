@@ -1,4 +1,17 @@
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import stylisticPlugin from '@stylistic/eslint-plugin';
+import unicornPlugin from 'eslint-plugin-unicorn';
+import importPlugin from 'eslint-plugin-import';
 import vuePlugin from 'eslint-plugin-vue';
+
+import jsBaseRules from '../javascript/rules/base';
+import jsImportRules from '../javascript/rules/import';
+import jsStylisticRules from '../javascript/rules/stylistic';
+import jsUnicornRules from '../javascript/rules/unicorn';
+
+import tsBaseRules from '../typescript/rules/base';
+import disabledJsRules from '../typescript/rules/disabled-js';
+import tsExtensionRules from '../typescript/rules/extension';
 
 import vueBaseRules from './rules/base';
 import vueExtensionRules from './rules/extension';
@@ -25,6 +38,27 @@ const overrideRules: FlatConfig.Rules = {
 
 const config: FlatConfig.ConfigArray = [
   ...baseVueConfig,
+  {
+    // Apply all TypeScript rules to .vue files as well
+    name: '@net-os/vue/typescript',
+    files: ['**/*.vue'],
+    plugins: {
+      import: importPlugin,
+      unicorn: unicornPlugin,
+      '@stylistic': stylisticPlugin,
+      '@typescript-eslint': typescriptPlugin,
+    },
+    rules: {
+      ...jsBaseRules,
+      ...jsImportRules,
+      ...jsStylisticRules,
+      ...jsUnicornRules,
+      ...disabledJsRules,
+      ...tsBaseRules,
+      ...tsExtensionRules,
+      '@stylistic/indent': 'off',
+    },
+  },
   {
     name: '@net-os/vue',
     files: ['**/*.{ts,vue}'],

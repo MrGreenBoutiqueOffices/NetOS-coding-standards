@@ -40,7 +40,7 @@ const configs: ConfigTestCase[] = [
   {
     name: 'vue',
     config: vue,
-    expectedEntries: ['vue/base/setup', 'vue/base/setup-for-vue', '@net-os/vue'],
+    expectedEntries: ['vue/base/setup', 'vue/base/setup-for-vue', '@net-os/vue/typescript', '@net-os/vue'],
   },
   {
     name: 'vitest',

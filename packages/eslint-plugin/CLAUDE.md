@@ -58,7 +58,7 @@ Rule files are pure data organized by concern (e.g., `react/rules/hooks.ts`, `re
 - **tailwindcss** — Tailwind class ordering, duplicate/conflict detection via `eslint-plugin-better-tailwindcss`
 - **tanstack** — TanStack Query rules (exhaustive deps, property order, query function validation)
 - **vitest** — Vitest test rules (naming, structure, expectations, mocking) via `@vitest/eslint-plugin`. Targets `**/{tests,__tests__}/**/*.{js,jsx,ts,tsx}`, `**/*{.,-}{spec,test}.{js,jsx,ts,tsx}`, `**/*Test.{js,jsx,ts,tsx}`.
-- **vue** — Vue component rules (template validation, directive ordering, component structure) for `**/*.{ts,vue}`. Integrates TypeScript parser via shared config. Overrides `unicorn/prevent-abbreviations` and `@typescript-eslint/no-use-before-define` for Vue-specific patterns.
+- **vue** — two config entries: `@net-os/vue/typescript` which re-applies all JS + TS rules to `**/*.vue` files so TypeScript rules also cover Vue SFCs (with `@stylistic/indent` disabled in favor of `vue/script-indent`), followed by `@net-os/vue` (Vue component rules — template validation, directive ordering, component structure) for `**/*.{ts,vue}` which comes last so its overrides (e.g. `unicorn/prevent-abbreviations`) take precedence. Integrates TypeScript parser via shared config.
 
 ### Shared utilities
 
@@ -83,7 +83,7 @@ tsdown produces dual-format output in `dist/`: ESM (`.mjs`), CJS (`.cjs`), and d
 - Rule files are pure data — no plugin imports, just rule name/config mappings
 - Plugin wiring (parser, plugin registration, file globs, settings) belongs in config `index.ts`, not in rule files
 - Each config entry has a `name` field (e.g., `@net-os/typescript`, `@net-os/react/hooks`) for ESLint config inspector
-- The `typescript` config re-imports and spreads JS rule files rather than extending the JS config array, so it stands alone
+- The `typescript` and `vue` configs re-import and spread JS/TS rule files rather than extending other config arrays, so they stand alone
 - React config overrides `@typescript-eslint/naming-convention` and `unicorn/prevent-abbreviations` to accommodate React patterns
 
 ## Adding a new config

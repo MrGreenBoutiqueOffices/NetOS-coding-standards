@@ -75,7 +75,7 @@ Enable configs by passing `true` in the options object. Only the selected config
 | `react`       | `**/*.tsx` (components), `**/*.{ts,tsx}` (hooks), test files (testing) | React, JSX a11y, hooks, DOM, testing-library                                                          |
 | `expo`        | `**/*.{js,jsx,ts,tsx}`                                                 | Expo / React Native specific rules                                                                    |
 | `vitest`      | test files (testing)                                                   | Vitest test rules (naming, structure, expectations, mocking)                                          |
-| `vue`         | `**/*.{ts,vue}`                                                        | Vue component rules (template validation, props, directives, component structure)                     |
+| `vue`         | `**/*.vue`, `**/*.{ts,vue}`                                            | Vue component rules + all TypeScript rules applied to `.vue` files                                    |
 | `tailwindcss` | all files                                                              | Tailwind class ordering, duplicate detection, deprecation checks                                      |
 | `tanstack`    | all files                                                              | TanStack Query exhaustive deps, property order, query function validation                             |
 
@@ -114,6 +114,15 @@ The `react` config is composed of three internal config entries:
 | `@net-os/react`         | `**/*.tsx`      | react, jsx-a11y, react-dom, react-x, react-naming-convention |
 | `@net-os/react/hooks`   | `**/*.{ts,tsx}` | react-hooks, react-web-api                                   |
 | `@net-os/react/testing` | test files      | testing-library                                              |
+
+### Vue sub-configs
+
+The `vue` config is composed of two internal config entries:
+
+| Name                     | Files           | Description                                                                                         |
+|--------------------------|-----------------|-----------------------------------------------------------------------------------------------------|
+| `@net-os/vue/typescript` | `**/*.vue`      | Re-applies all JS + TS rules to `.vue` files (`@stylistic/indent` disabled for `vue/script-indent`) |
+| `@net-os/vue`            | `**/*.{ts,vue}` | Vue template validation, directive ordering, component structure, parser setup                      |
 
 ## Peer dependencies
 
