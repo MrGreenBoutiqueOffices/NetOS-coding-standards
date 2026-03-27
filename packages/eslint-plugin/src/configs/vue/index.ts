@@ -16,6 +16,7 @@ import tsExtensionRules from '../typescript/rules/extension';
 import vueBaseRules from './rules/base';
 import vueExtensionRules from './rules/extension';
 
+import { getNamingConventionRuleOptions } from '../../utils/rules';
 import { typescriptLanguageOptions, typescriptSettings } from '../../shared/typescript-language';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
@@ -47,6 +48,9 @@ const overrideRules: FlatConfig.Rules = {
       /attrs|params|prop|props|ref|refs/i,
     ],
   }],
+  '@typescript-eslint/naming-convention': ['error', ...getNamingConventionRuleOptions([
+    { selector: 'variable', format: ['strictCamelCase', 'StrictPascalCase', 'UPPER_CASE'] },
+  ])],
 };
 
 const config: FlatConfig.ConfigArray = [

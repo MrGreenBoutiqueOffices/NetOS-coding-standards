@@ -282,7 +282,7 @@ const rules: FlatConfig.Rules = {
   'vue/require-prop-comment': 'off',
   'vue/require-typed-object-prop': 'error',
   'vue/require-typed-ref': 'error',
-  'vue/restricted-component-names': 'error',
+  'vue/restricted-component-names': 'off',
   'vue/script-indent': ['error', 2, {
     baseIndent: 1,
     switchCase: 1,

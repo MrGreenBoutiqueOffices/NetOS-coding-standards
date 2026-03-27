@@ -146,7 +146,7 @@ const rules: FlatConfig.Rules = {
   'no-extra-label': 'error',
   'no-global-assign': 'error',
   'no-implicit-coercion': ['error', {
-    boolean: true,
+    boolean: false,
   }],
   'no-implicit-globals': 'off',
   'no-implied-eval': 'error',

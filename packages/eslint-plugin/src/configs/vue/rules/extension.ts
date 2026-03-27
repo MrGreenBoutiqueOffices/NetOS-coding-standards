@@ -32,7 +32,7 @@ const rules: FlatConfig.Rules = {
   'vue/no-empty-pattern': 'error',
   'vue/no-extra-parens': 'off',
   'vue/no-implicit-coercion': ['error', {
-    boolean: true,
+    boolean: false,
   }],
   'vue/no-irregular-whitespace': 'error',
   'vue/no-loss-of-precision': 'error',
