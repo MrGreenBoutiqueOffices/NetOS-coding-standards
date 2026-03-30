@@ -1,6 +1,6 @@
 {
   "name": "@net-os/eslint-plugin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Official ESLint plugin for NetOS, enforcing consistent coding standards across frontend projects.",
   "keywords": [
     "eslint",

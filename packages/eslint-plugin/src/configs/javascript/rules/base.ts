@@ -83,7 +83,7 @@ const rules: FlatConfig.Rules = {
   complexity: 'off',
   'consistent-return': 'error',
   'consistent-this': 'off',
-  curly: ['error', 'multi-line'],
+  curly: ['error', 'all'],
   'default-case': ['error', {
     commentPattern: '^no default$',
   }],
