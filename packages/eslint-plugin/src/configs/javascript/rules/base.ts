@@ -78,7 +78,9 @@ const rules: FlatConfig.Rules = {
   camelcase: ['error', {
     properties: 'never',
   }],
-  'capitalized-comments': 'error',
+  'capitalized-comments': ['error', 'always', {
+    ignoreConsecutiveComments: true,
+  }],
   'class-methods-use-this': 'error',
   complexity: 'off',
   'consistent-return': 'error',
