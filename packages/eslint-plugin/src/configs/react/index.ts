@@ -29,6 +29,9 @@ const tsxSettings: FlatConfig.Settings = {
 };
 
 const overrideRules: FlatConfig.Rules = {
+  'new-cap': ['error', {
+    capIsNewExceptionPattern: String.raw`^(Immutable|Gesture)\.`,
+  }],
   '@typescript-eslint/naming-convention': ['error', ...getNamingConventionRuleOptions([
     { selector: 'variable', format: ['strictCamelCase', 'StrictPascalCase', 'UPPER_CASE'] },
     { selector: 'function', format: ['strictCamelCase', 'StrictPascalCase'] },
