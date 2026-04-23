@@ -4,6 +4,10 @@ import baseRules from './rules/base';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 
+const overrideRules: FlatConfig.Rules = {
+  'jsx-a11y/prefer-tag-over-role': 'off',
+};
+
 const config: FlatConfig.ConfigArray = [
   {
     name: '@net-os/expo',
@@ -13,6 +17,7 @@ const config: FlatConfig.ConfigArray = [
     },
     rules: {
       ...baseRules,
+      ...overrideRules,
     },
   },
 ];
