@@ -16,7 +16,7 @@ import testingRules from './rules/testing';
 import webApiRules from './rules/web-api';
 import xRules from './rules/x';
 
-import { getNamingConventionRuleOptions } from '../../utils/rules';
+import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '../../utils/rules';
 import { typescriptLanguageOptions, typescriptSettings } from '../../shared/typescript-language';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
@@ -32,6 +32,10 @@ const overrideRules: FlatConfig.Rules = {
   'new-cap': ['error', {
     capIsNewExceptionPattern: String.raw`^(Immutable|Gesture)\.`,
   }],
+  'import/no-unresolved': ['error', {
+    ignore: [String.raw`\.(png|jpg|jpeg|gif|svg|webp|otf|ttf|woff2?)$`],
+  }],
+  'import/extensions': ['error', 'never', getImportExtensionsRuleOptions(true, true, true)],
   '@typescript-eslint/naming-convention': ['error', ...getNamingConventionRuleOptions([
     { selector: 'variable', format: ['strictCamelCase', 'StrictPascalCase', 'UPPER_CASE'] },
     { selector: 'function', format: ['strictCamelCase', 'StrictPascalCase'] },

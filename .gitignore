@@ -1,8 +1,22 @@
 # gitignore
+.DS_Store
 node_modules
+.vscode
 .idea
 
 # Only apps should have lockfiles
 package-lock.json
 yarn.lock
 /packages/php-linting-rules/vendor/
+
+**/.agents
+**/.claude
+**/.codex
+**/.cursor
+**/.github/skills
+**/.opencode
+**/.junie
+**/.env
+**/.gemini
+**/.mcp.json
+

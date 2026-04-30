@@ -16,7 +16,7 @@ import tsExtensionRules from '../typescript/rules/extension';
 import vueBaseRules from './rules/base';
 import vueExtensionRules from './rules/extension';
 
-import { getNamingConventionRuleOptions } from '../../utils/rules';
+import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '../../utils/rules';
 import { typescriptLanguageOptions, typescriptSettings } from '../../shared/typescript-language';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
@@ -39,6 +39,10 @@ const overrideRules: FlatConfig.Rules = {
     properties: 'always',
     exceptions: ['t', 'rt', 'd', 'n', 'te', 'tm'],
   }],
+  'import/no-unresolved': ['error', {
+    ignore: [String.raw`\.(png|jpg|jpeg|gif|svg|webp|otf|ttf|woff2?)$`],
+  }],
+  'import/extensions': ['error', 'never', getImportExtensionsRuleOptions(true, true, true)],
   'unicorn/prevent-abbreviations': ['error', {
     checkShorthandProperties: true,
     checkProperties: true,

@@ -1,3 +1,5 @@
+import { getImportExtensionsRuleOptions } from '../../../utils/rules';
+
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 
 const rules: FlatConfig.Rules = {
@@ -36,9 +38,7 @@ const rules: FlatConfig.Rules = {
   'import/consistent-type-specifier-style': 'error',
   'import/dynamic-import-chunkname': 'off',
   'import/exports-last': 'off',
-  'import/extensions': ['error', 'never', {
-    json: 'always',
-  }],
+  'import/extensions': ['error', 'never', getImportExtensionsRuleOptions()],
   'import/first': 'error',
   'import/group-exports': 'off',
   'import/newline-after-import': 'error',

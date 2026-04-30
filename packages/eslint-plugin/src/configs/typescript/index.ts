@@ -12,9 +12,14 @@ import tsBaseRules from './rules/base';
 import disabledJsRules from './rules/disabled-js';
 import extensionRules from './rules/extension';
 
+import { getImportExtensionsRuleOptions } from '../../utils/rules';
 import { typescriptLanguageOptions, typescriptSettings } from '../../shared/typescript-language';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
+
+const overrideRules: FlatConfig.Rules = {
+  'import/extensions': ['error', 'never', getImportExtensionsRuleOptions(true, true)],
+};
 
 const config: FlatConfig.ConfigArray = [
   {
@@ -36,6 +41,7 @@ const config: FlatConfig.ConfigArray = [
       ...disabledJsRules,
       ...tsBaseRules,
       ...extensionRules,
+      ...overrideRules,
     },
   },
   {
