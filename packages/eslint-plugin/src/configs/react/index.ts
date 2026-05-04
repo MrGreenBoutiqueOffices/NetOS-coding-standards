@@ -29,6 +29,9 @@ const tsxSettings: FlatConfig.Settings = {
 };
 
 const overrideRules: FlatConfig.Rules = {
+  'id-length': ['error', {
+    exceptions: ['x', 'y'],
+  }],
   'new-cap': ['error', {
     capIsNewExceptionPattern: String.raw`^(Immutable|Gesture)\.`,
   }],
