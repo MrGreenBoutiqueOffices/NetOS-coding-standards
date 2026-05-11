@@ -1,6 +1,6 @@
 {
   "name": "@net-os/eslint-plugin",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Official ESLint plugin for NetOS, enforcing consistent coding standards across frontend projects.",
   "keywords": [
     "eslint",
@@ -40,6 +40,16 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
+      }
+    },
+    "./utils": {
+      "import": {
+        "types": "./dist/utils.d.mts",
+        "default": "./dist/utils.mjs"
+      },
+      "require": {
+        "types": "./dist/utils.d.cts",
+        "default": "./dist/utils.cjs"
       }
     },
     "./package.json": "./package.json"
