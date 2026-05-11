@@ -3,14 +3,21 @@ import { defaultNamingConventionOptions } from '../configs/typescript/rules/base
 import type { ImportExtensionOptions } from '../../types/rules';
 import type { NamingConventionItemLike } from '../configs/typescript/rules/base';
 
-export function getNamingConventionRuleOptions(replacements?: NamingConventionItemLike[]): NamingConventionItemLike[] {
-  if (replacements) {
-    return defaultNamingConventionOptions.map(option => {
-      return replacements.find(replacement => replacement.selector === option.selector) ?? option;
-    });
+export function getNamingConventionRuleOptions(
+  overrides: NamingConventionItemLike[] = [],
+): NamingConventionItemLike[] {
+  const bySlot = new Map<string, NamingConventionItemLike>();
+  const slotKey = (item: NamingConventionItemLike): string => {
+    const { selector, modifiers = [], filter = null } = item;
+
+    return JSON.stringify([selector, [...modifiers].sort(), filter]);
+  };
+
+  for (const item of [...defaultNamingConventionOptions, ...overrides]) {
+    bySlot.set(slotKey(item), item);
   }
 
-  return [...defaultNamingConventionOptions];
+  return [...bySlot.values()];
 }
 
 export function getImportExtensionsRuleOptions(

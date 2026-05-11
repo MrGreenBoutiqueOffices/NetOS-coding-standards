@@ -3,6 +3,8 @@ import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 export interface NamingConventionItemLike {
   [key: string]: unknown;
   selector: string;
+  modifiers?: string[];
+  filter?: unknown;
 }
 
 export const defaultNamingConventionOptions: NamingConventionItemLike[] = [
