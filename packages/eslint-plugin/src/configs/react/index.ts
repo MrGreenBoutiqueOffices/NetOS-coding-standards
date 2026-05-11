@@ -16,8 +16,8 @@ import testingRules from './rules/testing';
 import webApiRules from './rules/web-api';
 import xRules from './rules/x';
 
-import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '../../utils/rules';
-import { typescriptLanguageOptions, typescriptSettings } from '../../shared/typescript-language';
+import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '@/utils/rules';
+import { typescriptLanguageOptions, typescriptSettings } from '@/shared/typescript-language';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 
@@ -40,8 +40,8 @@ const overrideRules: FlatConfig.Rules = {
   }],
   'import/extensions': ['error', 'never', getImportExtensionsRuleOptions(true, true, true)],
   '@typescript-eslint/naming-convention': ['error', ...getNamingConventionRuleOptions([
-    { selector: 'variable', format: ['strictCamelCase', 'StrictPascalCase', 'UPPER_CASE'] },
-    { selector: 'function', format: ['strictCamelCase', 'StrictPascalCase'] },
+    { selector: 'variable', format: ['strictCamelCase', 'StrictPascalCase', 'UPPER_CASE'], overrideExistingSelector: true },
+    { selector: 'function', format: ['strictCamelCase', 'StrictPascalCase'], overrideExistingSelector: true },
   ])],
   'unicorn/prevent-abbreviations': ['error', {
     checkShorthandProperties: true,

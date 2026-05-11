@@ -32,6 +32,7 @@ const rules: FlatConfig.Rules = {
   'react/jsx-first-prop-new-line': 'off',
   'react/jsx-handler-names': ['error', {
     checkLocalVariables: true,
+    checkInlineFunction: false,
   }],
   'react/jsx-indent': 'off',
   'react/jsx-indent-props': 'off',

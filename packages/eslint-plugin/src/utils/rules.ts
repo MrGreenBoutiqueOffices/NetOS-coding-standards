@@ -1,23 +1,23 @@
-import { defaultNamingConventionOptions } from '../configs/typescript/rules/base';
+import { defaultNamingConventionOptions } from '@/configs/typescript/rules/base';
 
 import type { ImportExtensionOptions } from '../../types/rules';
-import type { NamingConventionItemLike } from '../configs/typescript/rules/base';
+import type { NamingConventionItemLike } from '@/configs/typescript/rules/base';
 
 export function getNamingConventionRuleOptions(
-  overrides: NamingConventionItemLike[] = [],
+  // TODO: replace overrideExistingSelector boolean type with more advanced type like 'first' | 'last' | 'all'
+  //  to determine what needs to be replaced. Because it's possible to have more than one of the same selectors.
+  otherNamingConventionRules: Array<NamingConventionItemLike & { overrideExistingSelector?: boolean }> = [],
 ): NamingConventionItemLike[] {
-  const bySlot = new Map<string, NamingConventionItemLike>();
-  const slotKey = (item: NamingConventionItemLike): string => {
-    const { selector, modifiers = [], filter = null } = item;
+  const namingConventionRules = [...defaultNamingConventionOptions];
 
-    return JSON.stringify([selector, [...modifiers].sort(), filter]);
-  };
+  for (const { overrideExistingSelector = false, ...item } of otherNamingConventionRules) {
+    const ruleIndex = namingConventionRules.findIndex(rule => rule.selector === item.selector);
+    const spliceStart = ruleIndex === -1 ? namingConventionRules.length : ruleIndex + Number(!overrideExistingSelector);
 
-  for (const item of [...defaultNamingConventionOptions, ...overrides]) {
-    bySlot.set(slotKey(item), item);
+    namingConventionRules.splice(spliceStart, Number(overrideExistingSelector), item);
   }
 
-  return [...bySlot.values()];
+  return namingConventionRules;
 }
 
 export function getImportExtensionsRuleOptions(
