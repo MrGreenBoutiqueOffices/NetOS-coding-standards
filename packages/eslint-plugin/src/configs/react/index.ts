@@ -16,8 +16,8 @@ import testingRules from './rules/testing';
 import webApiRules from './rules/web-api';
 import xRules from './rules/x';
 
-import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '@/utils/rules';
-import { typescriptLanguageOptions, typescriptSettings } from '@/shared/typescript-language';
+import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '../../utils/rules';
+import { typescriptLanguageOptions, typescriptSettings } from '../../shared/typescript-language';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 

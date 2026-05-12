@@ -16,8 +16,8 @@ import tsExtensionRules from '../typescript/rules/extension';
 import vueBaseRules from './rules/base';
 import vueExtensionRules from './rules/extension';
 
-import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '@/utils';
-import { typescriptLanguageOptions, typescriptSettings } from '@/shared/typescript-language';
+import { getImportExtensionsRuleOptions, getNamingConventionRuleOptions } from '../../utils';
+import { typescriptLanguageOptions, typescriptSettings } from '../../shared/typescript-language';
 
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getImportExtensionsRuleOptions } from '@/utils/rules';
+import { getImportExtensionsRuleOptions } from '../../../src/utils/rules';
 
 describe('getImportExtensionsRuleOptions utility', () => {
   it('should return base pattern with only json when called with no arguments', () => {

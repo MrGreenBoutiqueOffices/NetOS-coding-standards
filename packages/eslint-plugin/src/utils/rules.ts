@@ -1,7 +1,7 @@
-import { defaultNamingConventionOptions } from '@/configs/typescript/rules/base';
+import { defaultNamingConventionOptions } from '../configs/typescript/rules/base';
 
 import type { ImportExtensionOptions } from '../../types/rules';
-import type { NamingConventionItemLike } from '@/configs/typescript/rules/base';
+import type { NamingConventionItemLike } from '../configs/typescript/rules/base';
 
 export function getNamingConventionRuleOptions(
   // TODO: replace overrideExistingSelector boolean type with more advanced type like 'first' | 'last' | 'all'

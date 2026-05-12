@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { getNamingConventionRuleOptions } from '@/utils/rules';
-import { defaultNamingConventionOptions } from '@/configs/typescript/rules/base';
+import { getNamingConventionRuleOptions } from '../../../src/utils/rules';
+import { defaultNamingConventionOptions } from '../../../src/configs/typescript/rules/base';
 
 describe('getNamingConventionRuleOptions utility', () => {
   it('should return a copy of defaults when called without overrides', () => {
