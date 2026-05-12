@@ -83,7 +83,7 @@ const rules: FlatConfig.Rules = {
   }],
   'class-methods-use-this': 'error',
   complexity: 'off',
-  'consistent-return': 'error',
+  'consistent-return': 'off',
   'consistent-this': 'off',
   curly: ['error', 'all'],
   'default-case': ['error', {

@@ -4,7 +4,7 @@ const rules: FlatConfig.Rules = {
   'class-methods-use-this': 'off',
   '@typescript-eslint/class-methods-use-this': 'error',
   'consistent-return': 'off',
-  '@typescript-eslint/consistent-return': 'error',
+  '@typescript-eslint/consistent-return': 'off',
   'default-param-last': 'off',
   '@typescript-eslint/default-param-last': 'error',
   'dot-notation': 'off',
